@@ -48,13 +48,6 @@
 #define TYPE_INTMEM		4
 #define TYPE_CUSTOM		5
 
-union fw_custom {
-	/* add custom resources here */
-	struct fw_rsc_custom_ints pru_ints;
-	/* maintain reserved as the last element */
-	uint32_t reserved;
-};
-
 /* Common Resource Structure Types */
 
 /**
@@ -326,7 +319,6 @@ struct fw_rsc_intmem {
  * @type: type of resource
  * @sub_type: type of custom resource
  * @rsc_size: size of @rsc (in bytes)
- * @rsc: the custom resource
  *
  * This resource allows for custom resources specific to an architecture or
  * device.
@@ -335,13 +327,13 @@ struct fw_rsc_intmem {
  * @rsc_size is the length of @rsc (in bytes), and @rsc is the actual
  * parameters. These will be interpreted by the host-side device-specific
  * driver.
+ * This data structure must immediately follow with custom resourcse data
  */
 
 struct fw_rsc_custom {
 	uint32_t type;
 	uint32_t sub_type;
 	uint32_t rsc_size;
-	union fw_custom rsc;
 };
 
 #endif /* _RSC_TYPES_H_ */

@@ -73,7 +73,10 @@ struct my_resource_table {
 	uint32_t offset[1]; /* Should match 'num' in actual definition */
 
 	/* intc definition */
-	struct fw_rsc_custom pru_ints;
+	/* custom resource header */
+	struct fw_rsc_custom hdr;
+	/* custom resource data */
+	struct fw_rsc_custom_ints pru_ints;
 };
 
 #pragma DATA_SECTION(am335x_pru_remoteproc_ResourceTable, ".resource_table")
@@ -90,15 +93,15 @@ struct my_resource_table am335x_pru_remoteproc_ResourceTable = {
 	{
 		TYPE_CUSTOM, TYPE_PRU_INTS,
 		sizeof(struct fw_rsc_custom_ints),
-		{ /* PRU_INTS version */
-		  0x0000,
-		  /* Channel-to-host mapping, 255 for unused */
-		  0, 1, 2, 3, 0, 6, 1, 7, HOST_UNUSED, HOST_UNUSED,
-		  /* Number of evts being mapped to channels */
-		  (sizeof(pru_intc_map) / sizeof(struct ch_map)),
-		  /* Pointer to the structure containing mapped events */
-		  pru_intc_map,
-		},
+	},
+	{ /* PRU_INTS version */
+		0x0000,
+		/* Channel-to-host mapping, 255 for unused */
+		0, 1, 2, 3, 0, 6, 1, 7, HOST_UNUSED, HOST_UNUSED,
+		/* Number of evts being mapped to channels */
+		(sizeof(pru_intc_map) / sizeof(struct ch_map)),
+		/* Pointer to the structure containing mapped events */
+		pru_intc_map,
 	},
 };
 
