@@ -104,32 +104,22 @@ struct my_resource_table am335x_pru_remoteproc_ResourceTable = {
 	{ /* PRU_INTS version */
 		1,
 		/* number of channels mapped to host */
-		9,
+		4,
 		/* Channel-to-host mapping */
 		{
 			{0, 0},
-			{1, 1},
 			{2, 2},
-			{3, 3},
 			{4, 4},
-			{5, 5},
-			{6, 6},
 			{7, 8},
-			{8, 9},
 		},
 		/* Number of evts being mapped to channels */
-		9,
+		4,
 		/* event to channel map */
 		{
 			{PORT1_RX_EOF_EVENT, 0},
-			{PORT2_RX_EOF_EVENT, 1},
 			{PRU_ARM_EVENT0, 2},
-			{PRU_ARM_EVENT1, 3},
 			{PRU_ARM_EVENT2, 4},
-			{PRU_ARM_EVENT3, 5},
-			{PRU_ARM_EVENT4, 6},
 			{MII_LINK0_EVENT, 7},
-			{MII_LINK1_EVENT, 8},
 		},
 	},
 };
