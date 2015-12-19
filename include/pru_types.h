@@ -38,6 +38,17 @@
 #define TYPE_PRU_INTS		1
 
 /**
+ * struct host_map - channel-to-host mapping
+ *
+ * @ch: channel number
+ * @host: host event number
+ */
+struct host_map {
+	uint8_t ch;
+	uint8_t host;
+};
+
+/**
  * struct ch_map - sysevts-to-channel mapping
  *
  * @evt: the number of the sysevt
@@ -77,7 +88,22 @@ struct fw_rsc_custom_ints {
 	uint16_t version;
 	uint8_t channel_host[10];
 	uint32_t num_evts;
-	struct ch_map *event_channel;
+	struct ch_map *event_channel[64];
 };
 
+/**
+ * struct fw_rsc_custom_ints_v1 - custom resource to define PRU interrupts
+ * @version: revision number of the custom ints type
+ * @num_channels: number of active channels in host map
+ * @channel_host: PRU channels to hosts map
+ * @num_evts: number of active sysevents in channel map
+ * @event_channel: mapping of sysevts to channels
+ */
+struct fw_rsc_custom_ints_v1 {
+	uint16_t version;
+	uint32_t num_channels;
+	struct host_map channel_host[10];
+	uint32_t num_evts;
+	struct ch_map event_channel[64];
+} __packed;
 #endif /* _PRU_TYPES_H_ */
